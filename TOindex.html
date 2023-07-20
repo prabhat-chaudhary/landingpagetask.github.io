@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO List</title>
+</head>
+<body>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #d1a822;
+    text-align: center;
+    margin: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 100px auto;
+    padding: 70px;
+    background-color: #f6f0f0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: #333;
+}
+
+.input-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 15px;
+    border: 3px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #20c925;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 44px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+}
+
+li:last-child {
+    border-bottom:none;
+}
+    </style>
+    <div class="container">
+        <h1>TO-DO List</h1>
+        <div class="input-container">
+            <input type="text" id="task" placeholder="Enter new to-do list task">
+            <button onclick="addTask()">Add</button>
+        </div>
+        <ul id="taskList">
+            <!-- Tasks will be added dynamically here -->
+        </ul>
+    </div>
+    <!-- <script src="script.js"></script> -->
+    <script>
+        // Get references to DOM elements
+const taskInput = document.getElementById('task');
+const taskList = document.getElementById('taskList');
+
+// Function to add a new task
+function addTask() {
+    const taskText = taskInput.value.trim();
+
+    if (taskText !== '') {
+        const taskItem = document.createElement('li');
+        taskItem.innerHTML = `
+            <span>${taskText}</span>
+            <button onclick="completeTask(this)">Done</button>
+            <button onclick="removeTask(this)">Remove</button>
+        `;
+        taskList.appendChild(taskItem);
+        taskInput.value = '';
+    }
+}
+
+// Function to mark a task as completed
+function completeTask(button) {
+    const taskItem = button.parentElement;
+    taskItem.classList.toggle('completed');
+}
+
+// Function to remove a task
+function removeTask(button) {
+    const taskItem = button.parentElement;
+    taskList.removeChild(taskItem);
+}
+
+    </script>
+</body>
+</html>
